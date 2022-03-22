@@ -1,0 +1,113 @@
+name: Check documentation
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: DocEvaluator
+        uses: compf/DocEvaluator@action
+        with:
+          include: |-
+            [
+              "*.java"
+            ]
+          exclude: "[]"
+          metrics: |-
+            [
+              {
+                "weight": 1,
+                "metric_name": "simple_comment",
+                "params": {
+                  "getter_pattern": "(get.*)|(is.*)",
+                  "setter_pattern": "set.*",
+                  "ignore_getter_setter": false
+                },
+                "unique_name": "simple_comment_0"
+              },
+              {
+                "weight": 1,
+                "metric_name": "public_members_only",
+                "params": {
+                  "getter_pattern": "(get.*)|(is.*)",
+                  "setter_pattern": "set.*",
+                  "ignore_getter_setter": false
+                },
+                "unique_name": "public_members_only_0"
+              },
+  
+              {
+                "weight": 1,
+                "metric_name": "method_fully_documented",
+                "params": {},
+                "unique_name": "method_fully_documented_0"
+              },
+              {
+                "weight": 1,
+                "metric_name": "comment_name_coherence",
+                "params": {
+                  "upper_theshold": 0.5,
+                  "lower_threshold": 0,
+                  "levenshtein_distance": 1
+                },
+                "unique_name": "comment_name_coherence_0"
+              },
+              {
+                "weight": 1,
+                "metric_name": "certain_terms",
+                "params": {
+                  "consider_tags": false,
+                  "k": 0.1,
+                  "levenshtein_distance": 1,
+                  "terms": [
+                    "aka",
+                    "e.g.",
+                    "viz",
+                    "i.e."
+                  ],
+                  "use_default_terms_too": false
+                },
+                "unique_name": "certain_terms_0"
+              },
+              {
+                "weight": 1,
+                "metric_name": "edge_case",
+                "params": {
+                  "terms": [
+                    "(#Negative)? #Verb %null",
+                    "if %null",
+                    "%null (will be | is)? treated as",
+                    "%null ~return~",
+                    "%null if",
+                    "#Negative %null"
+                  ],
+                  "only_public": true,
+                  "k": 0.1
+                },
+                "unique_name": "edge_case_0"
+              }
+            ]
+          absolute_threshold: 20
+          builder: default_builder
+          parser: java
+          path_weights: "[]"
+          component_weights: "[]"
+          default_path_weight: 1
+          default_component_weight: 1
+          state_manager: file
+          relative_threshold: 30
+          builder_params: "{}"
+      - name: Add & commit
+        if: always()
+        uses: EndBug/add-and-commit@v7.5.0
+        with:
+          add: .evaluator_last_state.txt
