@@ -21,7 +21,7 @@ public class Utilities{
      * @return true if {@code dividend} can be divided by {@code divisor},
      *         false if not or divisor is zero
      */
-    public boolean isDivisbleBy(long dividend,long divisor){
+    public boolean isDivisibleBy(long dividend,long divisor){
         if(divisor==0)return false;
         return dividend % divisor==0;
     }
