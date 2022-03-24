@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.test_debug }}
+          token: ${{ secrets.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 }}
       - name: DocEvaluator
         uses: compf/DocEvaluator@action
         with:
