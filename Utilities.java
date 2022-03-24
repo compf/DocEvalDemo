@@ -28,7 +28,7 @@ public class Utilities{
     /**
      * Concatenates the given string {@code numberRepeats} times to create repeated a string
      * @param toRepeat any string sequence to repeat, may not be null
-     * @param numberRepeats a positive number describing how opften to repeat
+     * @param numberRepeats a positive number describing how often to repeat
      * @return a new string that repeats {@code toRepeat} {@code numberRepeats} times,
      *         will return an empty string if {@code numberRepeats} is non-positive
      */
