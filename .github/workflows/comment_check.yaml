@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          token:  ${{secrets.github_action_debug}}
+          token: '${{secrets.github_action_debug}}'
       - name: DocEvaluator
         uses: compf/DocEvaluator@action
         with:
