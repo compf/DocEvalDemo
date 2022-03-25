@@ -105,7 +105,7 @@ jobs:
           component_weights: "[]"
           default_path_weight: 1
           default_component_weight: 1
-          state_manager: file
+          state_manager: none
           relative_threshold: 30
           builder_params: "{}"
       - name: Add & commit
