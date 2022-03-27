@@ -14,8 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.PAT }}
       - name: DocEvaluator
         uses: compf/DocEvaluator@action
         with:
@@ -36,17 +34,6 @@ jobs:
                 },
                 "unique_name": "simple_comment_0"
               },
-              {
-                "weight": 1,
-                "metric_name": "public_members_only",
-                "params": {
-                  "getter_pattern": "(get.*)|(is.*)",
-                  "setter_pattern": "set.*",
-                  "ignore_getter_setter": false
-                },
-                "unique_name": "public_members_only_0"
-              },
-  
               {
                 "weight": 1,
                 "metric_name": "method_fully_documented",
