@@ -85,7 +85,7 @@ jobs:
                 "unique_name": "edge_case_0"
               }
             ]
-          absolute_threshold: 25
+          absolute_threshold: 15
           builder: default_builder
           parser: java
           path_weights: "[]"
